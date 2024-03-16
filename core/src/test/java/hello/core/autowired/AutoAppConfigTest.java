@@ -1,4 +1,4 @@
-package hello.core.scan;
+package hello.core.autowired;
 
 import hello.core.AutoAppConfig;
 import hello.core.member.MemberService;
