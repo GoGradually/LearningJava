@@ -1,4 +1,4 @@
-package hello.servlet.domain.member;
+package hello.servlet.domain.Member;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +19,6 @@ class MemberRepositoryTest {
 
     @Test
     void save() {
-        
         //given
         Member member = new Member("Hello", 20);
 
