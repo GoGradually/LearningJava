@@ -19,6 +19,7 @@ class MemberRepositoryTest {
 
     @Test
     void save() {
+        
         //given
         Member member = new Member("Hello", 20);
 
