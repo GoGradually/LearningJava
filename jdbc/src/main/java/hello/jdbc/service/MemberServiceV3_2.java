@@ -23,11 +23,9 @@ public class MemberServiceV3_2 {
 
     public MemberServiceV3_2(MemberRepositoryV3 memberRepository, PlatformTransactionManager transactionManager) {
         this.memberRepository = memberRepository;
-        // Todo
         this.txTemplate = new TransactionTemplate(transactionManager);
     }
 
-    //Todo
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         txTemplate.executeWithoutResult((status) -> {
             try {
