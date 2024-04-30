@@ -17,17 +17,16 @@ public class JpaMain {
 
         try{
 
-//            Member findMember = em.find(Member.class, 1L);
+            Member member = em.find(Member.class, 100L);
+            member.setName("zzzzz");
 
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(2)
-                    .getResultList();
+            em.clear();
 
-            for (Member member : result) {
-                System.out.println("member.getName() = " + member.getName());
-            }
+            Member member2 = em.find(Member.class, 100L);
 
+            System.out.println("member == member2 ? : "+(member == member2));
+            System.out.println("member2.getId() = " + member2.getId());
+            System.out.println("member2.getName() = " + member2.getName());
             tx.commit();
         }catch(Exception e){
             tx.rollback();
