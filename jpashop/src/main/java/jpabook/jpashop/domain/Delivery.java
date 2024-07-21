@@ -9,6 +9,7 @@ import lombok.Setter;
 public class Delivery {
 
     @Id @GeneratedValue
+    @Column(name = "delivery_id")
     private Long id;
 
     @OneToOne(mappedBy = "delivery")
@@ -17,5 +18,6 @@ public class Delivery {
     @Embedded
     private Address address;
 
+    @Enumerated(value = EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 }
