@@ -12,15 +12,16 @@ import java.util.List;
 @Getter
 @Setter
 public class Category {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "category_id")
     private Long id;
 
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "categori_item",
-        joinColumns = @JoinColumn(name = "category_id"),
+    @JoinTable(name = "category_item",
+            joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     private List<Item> items = new ArrayList<>();
@@ -34,7 +35,7 @@ public class Category {
 
 
     // === 연관관계 메소드=== //
-    public void addChildCategory(Category child){
+    public void addChildCategory(Category child) {
         this.child.add(child);
         child.setParent(this);
     }
