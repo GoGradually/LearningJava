@@ -12,20 +12,21 @@ public class MemberRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public Long save(Member member){
+    public Long save(Member member) {
         em.persist(member);
         return member.getId();
     }
-    public Member find(Long memberId){
+
+    public Member findOne(Long memberId) {
         return em.find(Member.class, memberId);
     }
 
-    public List<Member> findAll(){
+    public List<Member> findAll() {
         return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
     }
 
-    public List<Member> findByName(String name){
+    public List<Member> findByName(String name) {
         return em.createQuery("select m from Member m where m.name=:name", Member.class)
                 .setParameter("name", name)
                 .getResultList();
