@@ -10,6 +10,7 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -85,11 +86,31 @@ public class OrderRepository {
         return query.getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class
+        ).setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
+
     public List<Order> findWithMemberDelibery(OrderSearch orderSearch) {
         return em.createQuery("select o from Order o"
                                 + " join fetch o.member m"
                                 + " join fetch o.delivery d"
                         , Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithItem(OrderSearch orderSearch) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d" +
+                                " join fetch o.orderItems oi" +
+                                " join fetch oi.item i", Order.class)
+                .setFirstResult(1)
+                .setMaxResults(1000)
                 .getResultList();
     }
 }
