@@ -12,7 +12,7 @@ import study.datajpa.entity.Member;
 
 import java.util.List;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
     @Query(name = "Member.findByUsername")
     List<Member> findByUsername(@Param("username") String username);
 
