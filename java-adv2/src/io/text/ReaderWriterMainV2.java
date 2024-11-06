@@ -1,0 +1,36 @@
+package io.text;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+import static io.text.TextConst.FILE_NAME;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+public class ReaderWriterMainV2 {
+    public static void main(String[] args) throws IOException {
+        String writeString = "ABC";
+        System.out.println("writeString = " + writeString);
+
+        // 파일에 쓰기
+        FileOutputStream fos = new FileOutputStream(FILE_NAME);
+        OutputStreamWriter osw = new OutputStreamWriter(fos, UTF_8);
+        osw.write(writeString);
+        osw.close();
+
+        // 파일에서 읽기
+        FileInputStream fis = new FileInputStream(FILE_NAME);
+        InputStreamReader isr = new InputStreamReader(fis, UTF_8);
+
+        StringBuilder builder = new StringBuilder();
+        int ch;
+        while ((ch = isr.read())!=-1) {
+            builder.append((char) ch);
+        }
+        isr.close();
+
+        String string = builder.toString();
+        System.out.println("string = " + string);
+    }
+}
