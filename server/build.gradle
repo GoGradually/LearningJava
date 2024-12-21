@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'hello'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    //스프링 MVC 추가
+    implementation 'org.springframework:spring-webmvc:6.0.4'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
