@@ -1,11 +1,10 @@
-package lambda;
+package stream;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class MyStream<T> {
     private final List<T> list;
