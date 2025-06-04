@@ -2,6 +2,7 @@ package stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -48,7 +49,7 @@ public class MyStream<T> {
     public static void main(String[] args) {
         List<Integer> integers = List.of(1, 2, 3, 4, 5);
         System.out.println("================My Stream 시작================");
-        MyStream.of(integers)
+        Optional<Integer> myFirst = MyStream.of(integers)
                 .filter(n -> {
                     boolean isOdd = n % 2 == 1;
                     System.out.println("값 " + n + " 홀수 여부 확인: " + isOdd);
@@ -58,12 +59,12 @@ public class MyStream<T> {
                     int result = n * 2;
                     System.out.println("변환된 값 = " + n + "->" + result);
                     return result;
-                });
-
+                }).findFirst();
+        System.out.println("myFirst = " + myFirst.orElse(-1));
         System.out.println("================My Stream 종료================");
 
         System.out.println("================Java Stream 시작================");
-        integers.stream()
+        Optional<Integer> javaFirst = integers.stream()
                 .filter(n -> {
                     boolean isOdd = n % 2 == 1;
                     System.out.println("값 " + n + " 홀수 여부 확인: " + isOdd);
@@ -73,9 +74,16 @@ public class MyStream<T> {
                     int result = n * 2;
                     System.out.println("변환된 값 = " + n + "->" + result);
                     return result;
-                });
+                }).findFirst();
+        System.out.println("javaFirst = " + javaFirst.orElse(-1));
         System.out.println("================Java Stream 종료================");
     }
+
+    public Optional<T> findFirst() {
+        return Optional.ofNullable(list.getFirst());
+    }
+
+
 }
 
 

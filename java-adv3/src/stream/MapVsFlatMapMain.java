@@ -8,9 +8,12 @@ public class MapVsFlatMapMain {
 
         System.out.println("2차원 -> 1차원 평탄화");
         List<List<Integer>> dimension2List = List.of(List.of(1, 2, 3), List.of(4, 5, 6));
-        dimension2List.stream()
+        System.out.println(dimension2List);
+        List<Integer> list1 = dimension2List.stream()
                 .flatMap(List::stream)
-                .forEach(System.out::println);
+                .toList();
+        System.out.println("list1 = " + list1);
+
         System.out.println();
 
         System.out.println("3차원 -> 2차원 평탄화");
@@ -27,14 +30,16 @@ public class MapVsFlatMapMain {
                 List.of(List
                         .of(107, 108, 109), List
                         .of(110, 111, 112)));
-        dimension3Lists.stream()
+        System.out.println(dimension3Lists);
+        List<List<Integer>> list2 = dimension3Lists.stream()
                 .flatMap(List::stream)
-                .forEach(System.out::println);
+                .toList();
+        System.out.println("list2 = " + list2);
         System.out.println();
 
         System.out.println("stream/optional 벗기기");
-        Optional<User> users = Optional.of(new User(new Address("12345")));
-        Address address = users.flatMap(User::getAddress).orElse(new Address("xxxxx"));
+        Optional<User> user = Optional.of(new User(new Address("12345")));
+        Address address = user.flatMap(User::getAddress).orElse(new Address("xxxxx"));
         System.out.println(address);
         // 비동기 작업에서 자주 쓰임
     }
